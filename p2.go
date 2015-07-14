@@ -1,7 +1,6 @@
 package main
 
 import (
-    "fmt"
     "os"
     "strings"
     "text/template"
@@ -25,9 +24,8 @@ var (
 
 func main() {
     kingpin.Parse()
-    fmt.Printf("Template name is %s", *templatePath)
 
-    t,err := template.New("conf").Parse("{{.LANGUAGE}}")
+    t, err := template.ParseFiles(*templatePath)
     if err != nil { panic(err) }
     m := getContext()
     t.Execute(os.Stdout, m)
