@@ -3,13 +3,13 @@ package main
 import (
     "os"
     "strings"
-    "text/template"
     "gopkg.in/alecthomas/kingpin.v2"
+    "github.com/flosch/pongo2"
 )
 
-func getContext() map[string]string{
+func getContext() map[string]interface{}{
     env := os.Environ()
-    ctx := make(map[string]string)
+    ctx := make(map[string]interface{})
     for _, el := range env {
         split := strings.SplitN(el, "=", 2)
         ctx[split[0]] = split[1]
@@ -24,9 +24,10 @@ var (
 
 func main() {
     kingpin.Parse()
+    t := pongo2.Must(pongo2.FromFile(*templatePath))
 
-    t, err := template.ParseFiles(*templatePath)
-    if err != nil { panic(err) }
-    m := getContext()
-    t.Execute(os.Stdout, m)
+    err := t.ExecuteWriter(getContext(), os.Stdout)
+    if err != nil {
+        panic(err)
+    }
 }
