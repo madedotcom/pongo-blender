@@ -7,7 +7,7 @@ To use pongo blender you need to have a template, pongo blender will collect the
 
 ```
 $ echo "{% if PONGO_ENV_VAR %} PONGO_ENV_VAR: {{ PONGO_ENV_VAR }} {% endif %}" > test_template
-$ PONGO_ENV_VAR=testing go run p2.go test_template
+$ PONGO_ENV_VAR=testing go run pongo-blender.go test_template
  PONGO_ENV_VAR: testing
 ```
 
