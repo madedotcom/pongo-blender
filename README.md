@@ -1,5 +1,8 @@
 # pongo-blender
 Renders pongo2 templates from environmental variables.
+pongo2 is the successor of pongo, a Django-syntax like templating-language.
+
+### READ: pongo-blender lets me use jinja2 templates inside docker containers and populate the values(secrets and configs) at container run time. One image, many containers, every container can have it's own configs.
 
 ## Requirements
 * golang
@@ -22,26 +25,46 @@ source ~/.bashrc
 Install pongo-blender and dependancies.
 ```
 cd $GOPATH/src && git clone https://github.com/madedotcom/pongo-blender && cd pongo-blender && go install .
+go build
 ```
+You now have a static binary called `pongo-blender`, you can run it anywhere.
+You can even copy it to `/bin/` .
+You can also add this binary to your docker image.
 
 ## Using pongo-blender
 
 To use pongo blender you need to have a template, pongo-blender will collect the environmental variables and will render the template using those variables. pongo-blender will output the rendered template to stdout. You can try pongo-blender like this:
 
-* Create a template file called `test_template` and populate with some templated `{{variables}}`
+* Create a `vars` file
 ```
-cd ~
-echo "{% if PONGO_ENV_VAR %} PONGO_ENV_VAR: {{ PONGO_ENV_VAR }} {% endif %}" > test_template
+vim vars
 ```
+with something like this
+```
+export SHOES="green"
+export CATS="cute"
+export STATE="busy"
+```
+
+* Create a `template` file with something like this
+ ```
+my shoes are {{ SHOES }}
+my cats are cute {{ CATS }}
+my states is {{ STATE }}
+```
+
 
 * Run pongo-blender passing it values for variables you want set
 ```
-PONGO_ENV_VAR=testing go run $GOPATH/src/pongo-blender/pongo-blender.go ~/test_template
+. vars && pongo-blender template > output
 ```
 
-The STDOUT should be your template with populated variable values.
+* The output file is a complete with your variables and template stuff
 ```
- PONGO_ENV_VAR: testing
+egidijus@ub-sol:/tmp/pongos$ cat output 
+my shoes are green
+my cats are cute cute
+my states is busy
 ```
 
 
