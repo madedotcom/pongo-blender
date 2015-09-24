@@ -19,6 +19,11 @@ echo "export GOPATH" >> ~/.bashrc
 echo "PATH=\$PATH:\$GOPATH/bin # Add GOPATH/bin to PATH for scripting" >> ~/.bashrc
 source ~/.bashrc
 ```
+For OSX you will also have to do
+```
+mkdir $GOPATH/bin
+export GOBIN=$GOPATH/bin
+```
 
 ## Dependencies
 * gopkg.in/alecthomas/kingpin.v2
