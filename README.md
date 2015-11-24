@@ -2,7 +2,7 @@
 Renders pongo2 templates from environmental variables.
 pongo2 is the successor of pongo, a Django-syntax like templating-language.
 
-### READ: pongo-blender lets me use ~~jinja2~~ pongo2 templates inside docker containers and populate the values(secrets and configs) at container run time. One image, many containers, every container can have it's own configs.
+### READ: pongo-blender lets me use ~~jinja2~~ pongo2 templates inside docker containers and populate the values(secrets and configs) at container run time. One image, many containers, every container can have its own configs.
 
 ##pongo2 examples
 https://github.com/flosch/pongo2/blob/master/template_tests/filters.tpl
@@ -19,13 +19,18 @@ echo "export GOPATH" >> ~/.bashrc
 echo "PATH=\$PATH:\$GOPATH/bin # Add GOPATH/bin to PATH for scripting" >> ~/.bashrc
 source ~/.bashrc
 ```
+For OSX you will also have to do
+```
+mkdir $GOPATH/bin
+export GOBIN=$GOPATH/bin
+```
 
-## Dependancies
+## Dependencies
 * gopkg.in/alecthomas/kingpin.v2
 * github.com/flosch/pongo2
 
 ## Install pongo-blender
-Install pongo-blender and dependancies.
+Install pongo-blender and dependencies.
 ```
 cd $GOPATH/src && git clone https://github.com/madedotcom/pongo-blender && cd pongo-blender && go get && go install .
 go build
