@@ -57,8 +57,8 @@ export STATE="busy"
 * Create a `template` file with something like this
  ```
 my shoes are {{ SHOES }}
-my cats are cute {{ CATS }}
-my states is {{ STATE }}
+my cats are {{ CATS }}
+my state is {{ STATE }}
 ```
 
 
@@ -71,8 +71,8 @@ my states is {{ STATE }}
 ```
 egidijus@ub-sol:/tmp/pongos$ cat output 
 my shoes are green
-my cats are cute cute
-my states is busy
+my cats are cute
+my state is busy
 ```
 
 
